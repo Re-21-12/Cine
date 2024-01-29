@@ -1,0 +1,26 @@
+﻿@model Cine.Models.Login
+
+<div class="container mt-5">
+    <h1 class="text-center">Login</h1>
+    @*@if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["Mensaje"]
+        </div>
+    }
+    *@
+
+    <form asp-controller="Login" asp-action="Validar" method="post">
+        <div class="form-group">
+            <label for="Usuario">Usuario:</label>
+            <input type="text" class="form-control" id="Usuario" name="Usuario" placeholder="Ingrese su usuario" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Password">Contraseña:</label>
+            <input type="password" class="form-control" id="Password" name="Password" placeholder="Ingrese su contraseña" required>
+        </div>
+
+        <button type="submit" class="btn btn-outline-secondary" style="margin-top:5px">Iniciar sesión</button>
+    </form>
+</div>

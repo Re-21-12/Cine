@@ -1,0 +1,71 @@
+﻿@model Cine.Models.Cliente
+
+@{
+    ViewData["Title"] = "Comprar Asiento";
+}
+
+<h4>Comprar Asiento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nit" class="control-label"></label>
+                @*
+                maxlength="13"
+                *@
+                <input asp-for="Nit" class="form-control" maxLength="13"/>
+                <span asp-validation-for="Nit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" placeholder="Jhon Doe" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+               
+            <div class="form-group">
+                <label asp-for="NumeroPelicula" class="control-label">Pelicula</label>
+                <input asp-for="NumeroPelicula" class="form-control" asp-items="@Model.NumeroPelicula" value="@Model.NumeroPelicula" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroSala" class="control-label">Sala</label>
+                <input asp-for="NumeroSala" class="form-control" asp-items="@Model.NumeroSala" value="@Model.NumeroSala" readonly/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NumeroAsiento" class="control-label"></label>
+                    <select asp-for="NumeroAsiento" class="form-control" asp-items="ViewBag.NumeroAsiento" id="NumeroAsiento"></select>
+                </div>
+            <h6 id="ticketDisplay">Ticket: @Model.NumeroPelicula @Model.NumeroSala </h6>
+
+            <div class="form-group">
+                <input  type="submit" value="Guardar" class="btn btn-primary" style="margin-top:5px" />
+            </div>
+        </form>
+    </div>
+    <div>
+  
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Peliculas" asp-action="UltimasPeliculas" class="btn btn-danger" style="margin-top:5px">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+    //Al cargar el documento ejecutaras una funcion usando JQuery
+        //$(document).ready(function () {})
+        $(function () {
+            //Seleccionamos el ID de la etiqueta y accedemos a su metodo .change
+            $('#NumeroAsiento').change(function () {
+                // Obtenemos el valor que seleccionamos y retornamos su valoor en el h6 del ticket para mostrarle al usuario un formato mas limpio
+                var selectedAsiento = $(this).val();
+                //seleccionamos el id del h6 donde lo vamos a mostrar y le damoos un formato    
+                $('#ticketDisplay').text('Ticket: @Model.NumeroPelicula @Model.NumeroSala ' + selectedAsiento);
+            });
+        });
+    </script>
+}

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Cine.Models.Asiento>
+
+@{
+    ViewData["Title"] = "Ver Asientos";
+}
+
+<h1>Administrar Asientos</h1>
+<p>
+    <a asp-controller="Salas" asp-action="Index" class="btn btn-dark">Ver Salas</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Inicio</a>
+    <form asp-action="Index" method="get">
+        <div class="form-group">
+            <select type="text" name="filtrarEstado" class="form-text">
+                <option >
+                </option>
+                <option value="Disponible">
+                    Disponible
+                </option>
+                <option value="Ocupado">
+                    Ocupado
+                </option>
+            </select>
+            <select type="int" name="NumeroSala" class="form-text" asp-items="ViewBag.NumeroSala">
+                <option ></option>
+            </select>
+            <input type="submit" value="Buscar" class="btn btn-outline-success btn-sm" />
+        </div>
+    </form>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+
+            <th>
+           
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+            Sala
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroAsiento)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroSalaNavigation.NumeroSala)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.NumeroAsiento" class="btn btn-warning">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.NumeroAsiento" class="btn btn-light">Visualizar</a>
+                    <a asp-action="Delete" asp-route-id="@item.NumeroAsiento" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4"><span>Cantidad total de asientos: </span> @Model.Count()</td>
+        </tr>
+    </tfoot>
+</table>

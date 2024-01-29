@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Cine.Models.Pelicula>
+@{
+    ViewData["Title"] = "Cine";
+}
+<div id="peliculaCarousel" class="carousel slide carousel-fade" data-ride="carousel" data-bs-interval="3000" data-bs-keyboard="true">
+    <div class="carousel-inner">
+        @foreach (var pelicula in Model)
+        {
+            <div class="carousel-item @(pelicula == Model.First() ? "active" : "")">
+                <img src="@pelicula.Url" class="d-block w-100" alt="Imagen Película" style="max-height: 300px; object-fit: cover;">
+                <div class="carousel-caption d-none d-md-block text-dark">
+                    <h5 style="font-size: 2em; color:white">@pelicula.Nombre</h5>
+                    <p style="font-size: 1.2em; color:white">@pelicula.Sinopsis</p>
+                </div>
+            </div>
+        }
+    </div>
+
+    <button class="carousel-control-prev" href="#peliculaCarousel" type="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" href="#peliculaCarousel" type="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>  
+    </button>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="UltimasPeliculas">
+            <div class="input-group input-group-sm">
+                <input type="text" name="nombrePelicula" class="form-control" placeholder="Londres Bajo Fuego" />
+                <button type="submit" class="btn btn-outline-dark">Buscar</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <form asp-action="UltimasPeliculas">
+            <div class="input-group input-group-sm">
+                <input type="date" name="dia" class="form-control" />
+                <input type="time" name="horaInicio" class="form-control" />
+                <button type="submit" class="btn btn-outline-dark">Buscar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="row">
+    @foreach (var pelicula in Model)
+    {
+        <div class="col-md-4" style="margin-top: 15px;">
+            <div class="card">
+                <img src="@pelicula.Url" class="card-img-top" alt="@pelicula.Nombre" style="max-height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">@pelicula.Nombre</h5>
+                    <p class="card-text">@ReducirSinopsis(pelicula.Sinopsis,40)</p>
+                    <h6>Director</h6>
+                    <p class="card-text">@pelicula.Director</p>
+                    <h6>Actores</h6>
+                    <p class="card-text">@pelicula.Actores</p>
+                    <h6>Sala</h6>
+                    <p class="card-text">@pelicula.NumeroSala</p>
+                   <div class="card-footer">
+                        <p style="color:black">@pelicula.Duracion | @pelicula.Idioma | @pelicula.Genero</p>
+                        <p style="color:black">@pelicula.Inicio - @pelicula.Final</p>
+                        <p style="color:black">@pelicula.DiaTransmision</p>
+                        @*<a asp-controller="Clientes" asp-action="Create" class="btn btn-outline-dark" style="margin-top:2px">Comprar Ticket</a>
+                    *@
+                        <form asp-controller="Clientes" asp-action="Create" method="get" style="margin-top: 10px;">
+                            <input type="hidden" name="NumeroSala" value="@pelicula.NumeroSala" />
+                            <input type="hidden" name="NumeroPelicula" value="@pelicula.Id" />
+                            <button class="btn btn-outline-dark" type="submit">
+                                Comprar Ticket
+                            </button>
+                        </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@*Ejecuta del lado del servidor esta funcion para retornar una cantidad fija de letras eso lo usmaos para hacer que los cards no sobrepasen el tamanio*@
+@functions {
+    public static string ReducirSinopsis(string sinopsis, int tamanioMaximo)
+    {
+        if (string.IsNullOrEmpty(sinopsis))
+            return sinopsis;
+            //Si el tamanio de la sinopsis es menor a el tamanio maximo retorna la sinopsis
+            // De no serlo crea un substring de la posicion 0 a el tamanio maximo y completa con 3 puntos
+        return sinopsis.Length <= tamanioMaximo? sinopsis: sinopsis.Substring(0, tamanioMaximo) + ". . .";
+    }
+}
+

@@ -1,0 +1,40 @@
+﻿@model Cine.Models.Sala
+
+@{
+    ViewData["Title"] = "Editando Sala";
+}
+
+<h1>Editar Sala @Model.NumeroSala</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Asientos" class="control-label"></label>
+                <input asp-for="Asientos" class="form-control" />
+                <span asp-validation-for="Asientos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label"></label>
+                <select asp-for="Estado" class="form-control">
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="NumeroSala" />
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" style="margin-top:5px" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class=" btn btn-danger" style="margin-top:5px">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

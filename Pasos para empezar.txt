@@ -1,0 +1,45 @@
+0]. Descargar entity framework core y tools en la version .net 6
+
+1] . revisamos el sv:
+	 sqlcmd -L
+2] . configuramos la cadena de conexion:
+	Scaffold-DbContext "server=TU_SERVIDOR;database=TU_BASE_DE_DATOS;Integrated Security=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+3] .	cambiar cadena de conexion en appsettings .json
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "conexion": "server=NOMBRESV;database=NOMBREDB;Integrated Security=True;"
+  },
+  "AllowedHosts": "*"
+}
+
+4] . En program.cs configurar el builder
+
+builder.Services.AddDbContext<Colocarnombredelcontext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("conexion")));
+//arriba de este
+var app = builder.Build();
+
+
+5]. Asignamos el o los models  y el context a. Agregar en carpeta controllers -> controlador -> controlador con vistas de entity frameork 	
+
+6]. Cambiar el layout o agregar el nuevoo controlador
+
+ <li class="nav-item">
+ <a class="nav-link text-dark" asp-area="" asp-controller="NOMBRECONTROLLER" asp-action="Index">MOSTRARTAREAS</a>
+  </li>
+`````````````````````
+
+1) en bd -> 
+	crear db -> create databse nombre
+		crear tabla -> create table persona (
+Id Int Identity(1,1) primary key,
+nombre varchar(255)
+)

@@ -1,0 +1,119 @@
+﻿@model Cine.Models.Pelicula
+
+@{
+    ViewData["Title"] = "Nueva Pelicula";
+}
+
+
+<h4>Nueva Pelicula</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" placeholder="Winnieh Poh" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Clasificacion" class="control-label"></label>
+                <select asp-for="Clasificacion" class="form-control" >
+                    <option value="A">
+                        A
+                    </option>
+                    <option value="B">
+                        B
+                    </option>
+                    <option value="C">
+                        C
+                    </option>
+                </select>
+                <span asp-validation-for="Clasificacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaTransmision" class="control-label"></label>
+                <input asp-for="DiaTransmision" type="datetime-local" class="form-control" >
+                <span asp-validation-for="DiaTransmision" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Inicio" class="control-label">Hora de Inicio:</label>
+                <input asp-for="Inicio" type="time" class="form-control" />
+                <span asp-validation-for="Inicio" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Final" class="control-label">Hora de Finalización:</label>
+                <input asp-for="Final" type="time" class="form-control" />
+                <span asp-validation-for="Final" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Idioma" class="control-label">Selecciona Idioma:</label>
+                <select asp-for="Idioma" class="form-control">
+                    <option value="Espanol">Doblada</option>
+                    <option value="Ingles">Inglés</option>
+                    <option value="Subtitulada">Subtitulada</option>
+                    <!-- Agrega más opciones según sea necesario -->
+                </select>
+                <span asp-validation-for="Idioma" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Genero" class="control-label"></label>
+                <input asp-for="Genero" class="form-control" placeholder="Terror" />
+                <span asp-validation-for="Genero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sinopsis" class="control-label">Sinopsis:</label>
+                <textarea asp-for="Sinopsis" class="form-control" placeholder="Erase una vez un osito mieloso..."></textarea>
+                <span asp-validation-for="Sinopsis" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Actores" class="control-label"></label>
+                <input asp-for="Actores" class="form-control" placeholder="Mario Gonzales, Maria Ramona " />
+                <span asp-validation-for="Actores" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Director" class="control-label"></label>
+                <input asp-for="Director" class="form-control" placeholder="Stephen King" />
+                <span asp-validation-for="Director" class="text-danger"></span>
+            </div>@*
+            <div class="form-group">
+                <label asp-for="Duracion" class="control-label"></label>
+                <input asp-for="Duracion" class="form-control" />
+                <span asp-validation-for="Duracion" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Estado" class="control-label">Estado:</label>
+                <select asp-for="Estado" class="form-control">
+                    <option value="1">Activo</option>
+                    <option value="0">Inactivo</option>
+                </select>
+
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NumeroSala" class="control-label"></label>
+                <select asp-for="NumeroSala" class="form-control" asp-items="ViewBag.NumeroSala"></select>
+                <span asp-validation-for="NumeroSala" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Url" class="control-label"></label>
+                <textarea asp-for="Url" class="form-control" ></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" style="margin-top:5px" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-danger" style="margin-top:5px">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

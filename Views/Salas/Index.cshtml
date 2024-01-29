@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Cine.Models.Sala>
+
+@{
+    ViewData["Title"] = "Ver Salas";
+}
+
+<h1>Visualizar Salas</h1>
+
+
+
+
+<p>
+    <a asp-action="Create" class="btn btn-dark">Crear Nueva Sala</a>
+    <a asp-controller="Asientoes" asp-action="Index" class="btn btn-dark">Ver Asientos</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Inicio</a>
+
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Sala
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Asientos)
+            </th>
+            <th>
+                        <form asp-action="Index" method="get">
+                            <div class="form-group">
+                                <select type="text" name="filtrarEstado" class="form-text">
+                                    <option value="activo">
+                                        Activo
+                                    </option>
+                                    <option value="Inactivo">
+                                        Inactivo
+                                    </option>
+                                </select>
+                                <input type="submit" value="Buscar" class="btn btn-outline-success btn-sm" />
+                            </div>
+                        </form>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroSala)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Asientos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado)
+                <td>
+                    <div class="row">
+                        <div class="col">
+                            <div class="btn-group-vertical">
+                                <a asp-action="Edit" asp-route-id="@item.NumeroSala" class="btn btn-warning">Editar</a>
+                                <a asp-action="Details" asp-route-id="@item.NumeroSala" class="btn btn-light" style="margin-top:5px">Visualizar</a>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="btn-group-vertical">
+                                <a asp-action="Delete" asp-route-id="@item.NumeroSala" class="btn btn-danger btn-block">Eliminar</a>
+                                <form asp-controller="Asientoes" asp-action="CrearAsientos" method="post" style="margin-top: 10px;">
+                                    <input type="hidden" name="NumeroSala" value="@item.NumeroSala" />
+                                    <button class="btn btn-success btn-block" type="submit">
+                                        Generar Asientos
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

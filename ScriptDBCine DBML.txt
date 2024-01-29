@@ -1,0 +1,40 @@
+Table Pelicula {
+  Id int [primary key, not null] // identity(1,1)
+  Nombre varchar(255) [not null]
+  Clasificacion varchar(1) [not null]
+  DiaTransmision date [not null]
+  Inicio time [not null]
+  Final time [not null]
+  Idioma varchar(100) [not null]
+  Genero varchar(100) [not null]
+  Sinopsis varchar(100) [not null]
+  Actores varchar(300) [not null]
+  Director varchar(100) [not null]
+  Duracion varchar(100) [not null]
+  url varchar(2000)
+  Estado int [not null] // 1 Activo | 0 Inactivo
+  NumeroSala int [ref: > Sala.NumeroSala]
+}
+
+Table Sala {
+  NumeroSala int [primary key]
+  Asientos int [not null]
+  Estado varchar(50)
+}
+
+Table Asiento {
+
+  NumeroAsiento int [primary key]
+  Estado varchar(50)
+  NumeroSala int [ref: > Sala.NumeroSala]
+}
+
+Table Cliente {
+  Id int [primary key]
+  NIT varchar(13) [not null]
+  Nombre varchar(255) [not null]
+  Ticket int [not null]
+  NumeroPelicula int [ref: > Pelicula.Id]
+  NumeroSala int [ref: > Sala.NumeroSala]
+  NumeroAsiento int [ref: > Asiento.NumeroAsiento]
+}

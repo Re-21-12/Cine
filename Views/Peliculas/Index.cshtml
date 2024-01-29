@@ -1,0 +1,117 @@
+﻿@model IEnumerable<Cine.Models.Pelicula>
+
+@{
+    ViewData["Title"] = "Ver Peliculas";
+}
+
+<h1>Ver Peliculas</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-dark">Crear Pelicula</a>
+    <a asp-controller="Salas"asp-action="Index" class="btn btn-dark">Ver Salas</a>
+    <a asp-controller="Asientoes" asp-action="Index" class="btn btn-dark">Ver Asientos</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Inicio</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clasificacion)
+            </th>
+            <th>
+                Dia
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Final)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idioma)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duracion)
+            </th>
+            <th>
+                <form asp-action="Index" method="get">
+                    <div class="form-group">
+                        <select type="int" name="filtrarEstado" class="form-text">
+                            <option value="1">
+                                Diponible
+                            </option>
+                            <option value="0">
+                                Inactivo
+                            </option>
+                        </select>
+                        <input type="submit" value="Buscar" class="btn btn-outline-success btn-sm" />
+                    </div>
+                </form>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                Sala
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clasificacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaTransmision)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Final)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Idioma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duracion)
+            </td>
+
+                <td>
+                        @if (item.Estado == 1)
+                        {
+                        <span class="text-success">Disponible</span>
+                        }
+                        else if (item.Estado == 0)
+                        {
+                        <span class="text-danger">Inactivo</span>
+                        }
+                </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroSala)
+            </td>
+                <td>
+                    <div class="btn-group-vertical" role="group">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Editar</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-light">Visualizar</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Eliminar</a>
+                    </div>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

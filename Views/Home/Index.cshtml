@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h1 class="display-4 text-center">Bienvenido</h1>
+    <p>Bienvenido al sistema de administracion de Cine, las presentes opciones cuentan con acciones tales como <span class="fw-bold">Visualizar, Crear, Detallar y Eliminar</span></p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+               
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Peliculas" asp-action="Index">Peliculas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Salas" asp-action="Index">Salas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Asientoes" asp-action="Index">Asientos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

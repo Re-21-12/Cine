@@ -27,7 +27,7 @@
 
 ## Diagrama ER
 
-![Diagrama ER DBML Cine](https://github.com/Re-21-12/Cine/assets/104967229/4adc7e5a-265f-4688-be35-dcac55a271ef)
+![image](https://github.com/Re-21-12/Cine/assets/104967229/2fa67ea6-3073-4f24-9067-9f5c76e20844)
 
 <hr/>
 

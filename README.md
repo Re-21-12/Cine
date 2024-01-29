@@ -20,6 +20,7 @@
 - Base de datos:
   - Sql Server
 <hr/>
+
 ## Casos de uso
 
 ![CasosdeusoCine](https://github.com/Re-21-12/Cine/assets/104967229/06506fc8-9930-467d-bc01-8cfd72ffbde4)

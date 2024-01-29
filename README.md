@@ -27,7 +27,8 @@
 
 ## Diagrama ER
 
-![image](https://github.com/Re-21-12/Cine/assets/104967229/2fa67ea6-3073-4f24-9067-9f5c76e20844)
+![image](https://github.com/Re-21-12/Cine/assets/104967229/7d8786e2-00f0-48b7-b9ac-0d5efc880005)
+
 
 <hr/>
 
